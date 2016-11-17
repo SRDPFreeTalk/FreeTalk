@@ -15,6 +15,10 @@
 |id|nchar(11)|否|学生的学号，作为唯一标识|
 |name|nvarchar(50)|否|学生的真实姓名|
 |nikename|nvarchar(50)|否|在论坛中显示的昵称|
-|||||
-|||||
-|||||
+|pic|nvarchar(MAX)|否|用户在论坛中的头像|
+|password|nchar(128)|否|使用hash加密算法得到固定长度的字符串。|
+|sex|bit|否|用户的性别|
+|birth|date|否|用户的出生年月|
+|year|nchar(4)|否|用户的入学年份|
+|email|nvarchar(100)|是|用户的邮箱，用来绑定|
+|mobile|nchar(11)|是|用户的手机号，用来绑定|
