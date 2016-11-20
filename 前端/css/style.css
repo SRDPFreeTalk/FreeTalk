@@ -3,12 +3,18 @@
 }
 a{
     text-decoration:none;
+    color: #333;
+    font-family: "Microsoft YaHei UI";
 }
 a p{
     text-decoration: none;
     color: #000;
 }
-p,h1,h2,h3,h4,h5,a,li{
+input,textarea{
+    border: none;
+    outline: none;
+}
+p,h1,h2,h3,h4,h5,a,li,button{
     font-family: "Microsoft YaHei UI";
 }
 .clr{
@@ -26,6 +32,9 @@ li{
     list-style-type:none;
 }
 input{
+    titel:none;
+}
+input{
     border: none;
 }
 body{
@@ -41,7 +50,7 @@ body{
 /*
  * header
  */
-@media screen and (max-width: 768px){
+/*@media screen and (max-width: 768px){*/
 
     .header {
         min-width: 300px;
@@ -155,7 +164,7 @@ body{
 
     .img img {
         width: 100%;
-        max-height: 200px;
+
     }
     .evaluate{
         float: right;
@@ -191,10 +200,30 @@ body{
     .chat_bg2{
         background: url("../img/chat-bubble2.png")  no-repeat; background-size:cover;
     }
+    .save{
+        width: 12px;
+        margin: 4px 0 0 10px;
+        height:12px;
+        cursor: pointer;
+        background: url("../img/star.png")  no-repeat; background-size:cover;
+    }
+    .save_bg1{
+        background: url("../img/star.png")  no-repeat; background-size:cover;
+
+    }
+    .save_bg2{
+        background: url("../img/star.png")  no-repeat; background-size:cover;
+    }
+    .save+p{
+        font-size: 10px;
+        color: #999999;
+        margin: 4px 10px 0 20px;
+        float: left;;
+    }
     .thumbs_up+p,.chat+p{
         font-size: 10px;
         color: #999999;
-        margin: 5px 0 0 10px;
+        margin: 4px 0 0 20px;
         float: left;;
     }
     /*
@@ -267,4 +296,247 @@ body{
         font-size: 12px;
         margin-left: 6px;
     }
-}
+    /*
+     * person
+     */
+    .person_head{
+        background: url("../img/person_bg.jpg");
+        background-size:100%;
+    }
+    .information{
+        width: 150px;
+        margin: 0 auto;
+    }
+    .person_head a{
+        float: right;
+        margin: 10px 20px 10px 0 ;
+    }
+    .information img{
+        width: 70px;
+        height: 70px;
+        border-radius: 50px;
+        margin-left: 40px;
+
+    }
+    .information h3{
+        margin-top: 5px;
+        text-align: center;
+    }
+    .information ul{
+        margin-top: 10px;
+        margin-left: 18px;
+        float: left;
+    }
+    .information ul li{
+        font-size:14px;
+        color:#999;
+        float: left;
+    }
+    .information p{
+        color:#999;
+        font-size: 14px;
+        letter-spacing: .3em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 5px 0 10px 0;
+    }
+    /*
+     * person func
+     */
+    .person_main{
+        padding-bottom:85px ;
+    }
+    .func{
+        cursor: pointer;
+        position: relative;
+        margin-top: 10px;
+        width:100%;
+        height: 50px;
+        background: #fff;
+    }
+    .myset{
+        margin-top: 85px;
+    }
+    {
+        bottom: -85px;
+    }
+    .func>p{
+        margin-left: 20px;
+        line-height: 50px;
+    }
+    .right_func{
+        top:0;
+        right:20px;
+        position: absolute ;
+        margin-left: 64%;
+    }
+    .right_func img{
+        float: left;
+
+    }
+    .isNew{
+        width: 6px;
+        margin: 22px 5px 0 0 ;
+    }
+    .jump_button{
+        width: 10px;
+        margin: 16px 0 0 5px;
+    }
+    .right_func p{
+        float: left;
+        line-height: 50px;
+    }
+    /*
+     * notice_head
+     */
+    .notice_head{
+        width:100%;
+        background: #fff;
+        height:40px;
+    }
+    .notice_head a{
+        float: right;
+        line-height: 40px;
+        margin-right: 20px;
+    }
+    .chatbox{
+        position: relative;
+        margin-top: 10px;
+        background: #ffffff;
+        height:80px;
+    }
+    .newMassage{
+        position: absolute;
+        width: 6px;
+        top:10px;
+        left: 20px;
+    }
+    .chatbox .title img{
+        margin-left: 20px;
+    }
+    .chatbox .subtitle h2{
+        width: 60%;
+        font-size: 18px;
+    }
+    .chatbox .subtitle h5{
+        position: absolute;
+        top:20px;
+        right: 20px;
+        font-size:12px;
+        color: #999;
+
+    }
+    .chatbox .subtitle p{
+        margin: 5px 0 0 10px;
+        overflow: hidden;
+        font-size:14px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #999;
+    }
+    /*
+     * post_footer
+     */
+    .post_footer{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+    .post_footer ul{
+        width:205px ;
+        position: absolute;
+        bottom: 82px;
+        left:50%;
+        margin-left:-102px;
+    }
+    .post_footer ul li {
+        float: left;
+        margin-left: 25px;
+    }
+    .post_footer ul li img,.post_footer ul li input{
+        width:35px;
+        height:35px;
+    }
+    .icon_input {
+        filter:alpha(opacity:0);opacity: 0;
+    }
+    .post{
+        width:90%;
+        height:60px;
+        margin: 10px 5% ;
+        border-radius: 30px;
+        background: #d55548;
+        color: #ffffff;
+        font-size: 20px;
+    }
+    .input_main textarea{
+        width:90%;
+        font-size: 16px;
+        height: 500px ;
+        resize: none;
+        padding-bottom: 110px;
+        margin: 10px 5%;
+    }
+    .input_main{
+        height:100%;
+
+    }
+    /*
+     * content
+     */
+    .content_head{
+        width: 100%;
+        height:40px;
+        background: #ffffff;
+    }
+    .content_head a{
+        float: left;
+        margin: 12px 0 0 10px ;
+    }
+    .content_head a img{
+        width: 10px;
+    }
+
+    .content_head h1{
+        width: 80%;
+        float: left;
+        line-height: 40px;
+        margin-left: 30px ;
+        font-size: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #2b313f;
+    }
+    .content_title{
+        margin: 10px 0;
+        background: #ffffff;
+    }
+    .content_main{
+        padding-bottom: 50px;
+        background: #ffffff;
+        width:100%;
+
+    }
+    .read{
+        margin: 0 10px;
+    }
+    .read h2{
+        padding: 10px 0;
+        font-size:18px;
+        line-height: 1.5em;
+    }
+    .read p{
+        text-indent:2em;
+        line-height: 1.5em;
+        word-spacing: .2em;
+
+    }
+    .read p img {
+        width: 100%;
+    }
+    .content_main .evaluate{
+        margin-top: 20px;
+    }
+/*}*/

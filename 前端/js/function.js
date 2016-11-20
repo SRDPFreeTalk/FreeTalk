@@ -21,4 +21,19 @@ $(document).ready(function(){
         $(this).toggleClass('chat_bg1').toggleClass('chat_bg2');
 
     });
+    $(".input_main textarea").bind("keydown keyup",function(){
+        $(this).autosize();
+    }).show().autosize();
+
+    $.fn.autosize = function(){
+        $(this).height('0px');
+        var setheight = $(this).get(0).scrollHeight;
+        if($(this).attr("_height") != setheight)
+            $(this).height(setheight+"px").attr("_height",setheight);
+        else
+            $(this).height($(this).attr("_height")+"px");
+    }
+
+
 });
+
