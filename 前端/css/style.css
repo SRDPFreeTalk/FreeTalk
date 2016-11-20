@@ -22,6 +22,7 @@ p,h1,h2,h3,h4,h5,a,li,button{
 
 }
 button{
+    cursor: pointer;
     outline: none;
     border: none;
 }
@@ -400,7 +401,7 @@ body{
         line-height: 40px;
         margin-right: 20px;
     }
-    .chatbox{
+    .chat_box{
         position: relative;
         margin-top: 10px;
         background: #ffffff;
@@ -412,14 +413,30 @@ body{
         top:10px;
         left: 20px;
     }
-    .chatbox .title img{
+    .move_box{
+        width: 95%;
+        position: absolute;
+    }
+    .delete_box{
+        cursor: pointer;
+    }
+    .checkbox{
+        background: #ffffff;
+        position:absolute;
+        height: 80px;
+        left: -20px;
+        z-index: 10;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+    .chat_box .title img{
         margin-left: 20px;
     }
-    .chatbox .subtitle h2{
+    .chat_box .subtitle h2{
         width: 60%;
         font-size: 18px;
     }
-    .chatbox .subtitle h5{
+    .chat_box .subtitle h5{
         position: absolute;
         top:20px;
         right: 20px;
@@ -427,13 +444,33 @@ body{
         color: #999;
 
     }
-    .chatbox .subtitle p{
+    .chat_box .subtitle p{
         margin: 5px 0 0 10px;
         overflow: hidden;
         font-size:14px;
         text-overflow: ellipsis;
         white-space: nowrap;
         color: #999;
+    }
+    .none {
+        display: none;
+        width: 100%;
+        position: fixed;
+        bottom:86px;
+    }
+    .none button{
+        float: left;
+        background: #ffffff;
+        height: 40px;
+        font-size: 16px;
+        border-radius: 20px;
+        width: 35%;
+        margin-left: 10%;
+    }
+
+    .none .del{
+        color: #ffffff;
+        background: #d55548;
     }
     /*
      * post_footer
