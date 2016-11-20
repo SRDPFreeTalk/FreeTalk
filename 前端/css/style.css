@@ -1,0 +1,270 @@
+*{
+    margin: 0;
+}
+a{
+    text-decoration:none;
+}
+a p{
+    text-decoration: none;
+    color: #000;
+}
+p,h1,h2,h3,h4,h5,a,li{
+    font-family: "Microsoft YaHei UI";
+}
+.clr{
+    clear: both;
+
+}
+button{
+    outline: none;
+    border: none;
+}
+*{
+    padding: 0;
+}
+li{
+    list-style-type:none;
+}
+input{
+    border: none;
+}
+body{
+    min-width: 300px;
+    background-color: #f3f8fb;
+    scrollbar:3px;
+}
+/*chrome更改滚动条样式*/
+::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar-track-piece { background-color: #ffffff;}
+::-webkit-scrollbar-thumb{height: 50px; background-color: #666; -webkit-border-radius: 3px;}
+
+/*
+ * header
+ */
+@media screen and (max-width: 768px){
+
+    .header {
+        min-width: 300px;
+        background: #fff;
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #bebebe;
+        position: fixed;
+        top: 0px;
+        z-index: 4;
+    }
+
+    .showMenu{
+        width: 40px;
+        height: 40px;
+        margin: 5px 0 0 10px;
+        float: left;
+        background: url("../img/FreeTalk.png") top center no-repeat; background-size:cover;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    .header form {
+        float: left;
+        position: relative;
+        width: 80%;
+        right: -10px;
+        height: 100%;
+    }
+
+    .input {
+        margin: 8px 20px 0 4%;
+        border: 1px solid red;
+        height: 30px;
+        width: 89%;
+        padding-left: 5%;
+        border-radius: 20px;
+    }
+
+    .input:focus {
+        outline: none;
+    }
+    .header form > input + a{
+        display: block;
+    }
+    .header form > input + a >img {
+        width: 20px;
+        position: absolute;
+        top: 14px;
+        right: 13px;
+    }
+
+    /*
+     * main
+     */
+    .main {
+        margin-top: 60px;
+        height: 100%;
+        margin-bottom: 85px;
+    }
+
+    .article {
+        margin-top: 10px;
+        width: 100%;
+        background: #fff;
+    }
+
+    .title img {
+        height: 60px;
+        width: 60px;
+        border-radius: 50px;
+        margin: 10px;
+        float: left;
+    }
+
+    .subtitle {
+        float: left;
+        width: 64%;
+    }
+
+    .subtitle h2 {
+        margin: 17px 0 0 10px;
+        font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #2b313f;
+    }
+
+    .label {
+        margin: 10px 0 0 5px;
+    }
+
+    .label li {
+        float: left;
+        font-size: 10px;
+        color: #999999;
+        margin-right: 4%;
+        overflow: hidden;
+    }
+
+    .label li p {
+        color: #999999;
+        display: inline;
+    }
+
+    .article_content p {
+        text-indent: 2em;
+        padding: 10px;
+    }
+
+    .img img {
+        width: 100%;
+        max-height: 200px;
+    }
+    .evaluate{
+        float: right;
+        margin:0 20px 10px 0;
+    }
+    .evaluate button{
+        float: left;
+    }
+    .thumbs_up{
+        margin: 4px 0 0 0;
+        width: 12px;
+        height:12px;
+        background: url("../img/thumbs-up.png")  no-repeat; background-size:cover;
+        cursor: pointer;
+    }
+    .thumbs_bg1{
+        background: url("../img/thumbs-up.png")  no-repeat; background-size:cover;
+    }
+    .thumbs_bg2{
+        background: url("../img/thumbs-up2.png")  no-repeat; background-size:cover;
+    }
+    .chat{
+        width: 21px;
+        margin: 0 0 0 10px;
+        height:21px;
+        cursor: pointer;
+        background: url("../img/chat-bubble.png")  no-repeat; background-size:cover;
+    }
+    .chat_bg1{
+        background: url("../img/chat-bubble.png")  no-repeat; background-size:cover;
+
+    }
+    .chat_bg2{
+        background: url("../img/chat-bubble2.png")  no-repeat; background-size:cover;
+    }
+    .thumbs_up+p,.chat+p{
+        font-size: 10px;
+        color: #999999;
+        margin: 5px 0 0 10px;
+        float: left;;
+    }
+    /*
+     * logo_onClick
+     */
+    .logo_onClick{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top:0px;
+        opacity:0.1;
+        z-index: 1;
+        background: #000;
+    }
+    .menu{
+        display: none;
+        position: fixed;
+        top:49px;
+        left: 5px;
+        width: 100px;
+        background:#fff;
+        z-index: 5;
+    }
+    .menu li{
+        line-height: 50px;
+        text-align:center;
+    }
+    .menu li a{
+        color: #2b313f;;
+        opacity:1;
+        display: block;
+        height: 50px;
+    }
+    .menu li a:active {
+        background: #ebebeb;
+    }
+    /*
+     * footer
+     */
+    .footer {
+        z-index: 2;
+        min-width: 300px;
+        border-top: 1px solid #bebebe;
+        height: 75px;
+        width: 100%;
+        background: #fff;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .footer>a {
+        width: 20%;
+        height: 50px;
+        float: left;
+    }
+
+    .setimg {
+        width: 35px;
+        height: 75px;
+        margin: 15px auto;
+    }
+
+    .setimg>img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .setimg>img + p {
+        font-size: 12px;
+        margin-left: 6px;
+    }
+}
