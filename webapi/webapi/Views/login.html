@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="../Views/js/jquery-v1.10.2.min.js"></script>
+    <title>登录</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    学号:<input type="text" id="TxtAccount" />
+    密码:<input type="password" id="TxtPassword" />
+    姓名:<input type="text" id="TxtName" />
+    昵称:<input type="text" id="TxtNike" />
+    性别<select id="SelSex" >
+    <option value="0">女</option>
+    <option value="1">男</option>
+    </select>
+    <button id="BtnOk">登录</button>
+    <script type="text/javascript">
+        $("#BtnOk").click(function () {
+            var ac = $("#TxtAccount").val();
+            var pa = $("#TxtPassword").val();
+                $.ajax({
+                    url: "/api/Index",
+                    type: "POST",
+                    dataType: "json",
+                    data: { 
+                        "account" : ac,
+                        "password" : pa
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                }).fail(
+                function (xhr, textStatus, err) {
+                    alert('Error: ' + err);
+                });
+        })
+    </script>
+</body>
+</html>

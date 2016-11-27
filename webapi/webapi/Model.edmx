@@ -1,0 +1,959 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="oucfreetalkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="blogreply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="replyto" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="ownlocation" Type="int" Nullable="false" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="blogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Nullable="false" />
+          <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ownlocation" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="friends">
+          <Key>
+            <PropertyRef Name="focus" />
+            <PropertyRef Name="befocus" />
+          </Key>
+          <Property Name="focus" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="befocus" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="postc">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="postlocation" Type="int" Nullable="false" />
+          <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ownpost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="postclass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="postreply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="replyto" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="ownlocation" Type="int" Nullable="false" />
+          <Property Name="contenttext" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Nullable="false" />
+          <Property Name="realbody" Type="int" Nullable="false" />
+          <Property Name="body" Type="int" Nullable="false" />
+          <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="contenttext" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ownclass" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ifname" Type="bit" Nullable="false" />
+          <Property Name="nikename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="70" Nullable="false" />
+          <Property Name="sex" Type="bit" Nullable="false" />
+          <Property Name="ifsex" Type="bit" Nullable="false" />
+          <Property Name="birth" Type="date" Nullable="false" />
+          <Property Name="ifbirth" Type="bit" Nullable="false" />
+          <Property Name="year" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="ifemail" Type="bit" Nullable="false" />
+          <Property Name="mobile" Type="nchar" MaxLength="11" />
+          <Property Name="ifmobile" Type="bit" Nullable="false" />
+          <Property Name="exp" Type="int" Nullable="false" />
+          <Property Name="family" Type="nvarchar" MaxLength="100" />
+          <Property Name="accountlevel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_blogreply_comment">
+          <End Role="comment" Type="Self.comment" Multiplicity="1" />
+          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="ownlocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogreply_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogreply_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="replyto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogs_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="blogs" Type="Self.blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogs">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_blogs">
+          <End Role="blogs" Type="Self.blogs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="ownlocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_students">
+          <End Role="students" Type="Self.students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="friends" Type="Self.friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="focus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="friends" Type="Self.friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="befocus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postc_posts">
+          <End Role="posts" Type="Self.posts" Multiplicity="1" />
+          <End Role="postc" Type="Self.postc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postc">
+              <PropertyRef Name="ownpost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postc_students">
+          <End Role="students" Type="Self.students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="postc" Type="Self.postc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postc">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_postc">
+          <End Role="postc" Type="Self.postc" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postc">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="ownlocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="replyto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_posts_students">
+          <End Role="postclass" Type="Self.postclass" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="posts" Type="Self.posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postclass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="ownclass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_posts_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="posts" Type="Self.posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="oucfreetalkModelStoreContainer">
+          <EntitySet Name="blogreply" EntityType="Self.blogreply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="blogs" EntityType="Self.blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="friends" EntityType="Self.friends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="postc" EntityType="Self.postc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="postclass" EntityType="Self.postclass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="postreply" EntityType="Self.postreply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_blogreply_comment" Association="Self.FK_blogreply_comment">
+            <End Role="comment" EntitySet="comment" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogreply_students" Association="Self.FK_blogreply_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogreply_students1" Association="Self.FK_blogreply_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogs_students" Association="Self.FK_blogs_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogs" EntitySet="blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_blogs" Association="Self.FK_comment_blogs">
+            <End Role="blogs" EntitySet="blogs" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_students" Association="Self.FK_comment_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_students" Association="Self.FK_friends_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_students1" Association="Self.FK_friends_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postc_posts" Association="Self.FK_postc_posts">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="postc" EntitySet="postc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postc_students" Association="Self.FK_postc_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="postc" EntitySet="postc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postreply_postc" Association="Self.FK_postreply_postc">
+            <End Role="postc" EntitySet="postc" />
+            <End Role="postreply" EntitySet="postreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postreply_students" Association="Self.FK_postreply_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="postreply" EntitySet="postreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postreply_students1" Association="Self.FK_postreply_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="postreply" EntitySet="postreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_posts_students" Association="Self.FK_posts_students">
+            <End Role="postclass" EntitySet="postclass" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_posts_students1" Association="Self.FK_posts_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="oucfreetalkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="blogreply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="replyto" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ownlocation" Type="Int32" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="comment" Relationship="Self.FK_blogreply_comment" FromRole="blogreply" ToRole="comment" />
+          <NavigationProperty Name="students" Relationship="Self.FK_blogreply_students" FromRole="blogreply" ToRole="students" />
+          <NavigationProperty Name="students1" Relationship="Self.FK_blogreply_students1" FromRole="blogreply" ToRole="students" />
+        </EntityType>
+        <EntityType Name="blogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="owner" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="students" Relationship="Self.FK_blogs_students" FromRole="blogs" ToRole="students" />
+          <NavigationProperty Name="comment" Relationship="Self.FK_comment_blogs" FromRole="blogs" ToRole="comment" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ownlocation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="blogreply" Relationship="Self.FK_blogreply_comment" FromRole="comment" ToRole="blogreply" />
+          <NavigationProperty Name="blogs" Relationship="Self.FK_comment_blogs" FromRole="comment" ToRole="blogs" />
+          <NavigationProperty Name="students" Relationship="Self.FK_comment_students" FromRole="comment" ToRole="students" />
+        </EntityType>
+        <EntityType Name="friends">
+          <Key>
+            <PropertyRef Name="focus" />
+            <PropertyRef Name="befocus" />
+          </Key>
+          <Property Name="focus" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="befocus" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="students" Relationship="Self.FK_friends_students" FromRole="friends" ToRole="students" />
+          <NavigationProperty Name="students1" Relationship="Self.FK_friends_students1" FromRole="friends" ToRole="students" />
+        </EntityType>
+        <EntityType Name="postc">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="postlocation" Type="Int32" Nullable="false" />
+          <Property Name="owner" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ownpost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="posts" Relationship="Self.FK_postc_posts" FromRole="postc" ToRole="posts" />
+          <NavigationProperty Name="students" Relationship="Self.FK_postc_students" FromRole="postc" ToRole="students" />
+          <NavigationProperty Name="postreply" Relationship="Self.FK_postreply_postc" FromRole="postc" ToRole="postreply" />
+        </EntityType>
+        <EntityType Name="postclass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="posts" Relationship="Self.FK_posts_students" FromRole="postclass" ToRole="posts" />
+        </EntityType>
+        <EntityType Name="postreply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="owner" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="replyto" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ownlocation" Type="Int32" Nullable="false" />
+          <Property Name="contenttext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="postc" Relationship="Self.FK_postreply_postc" FromRole="postreply" ToRole="postc" />
+          <NavigationProperty Name="students" Relationship="Self.FK_postreply_students" FromRole="postreply" ToRole="students" />
+          <NavigationProperty Name="students1" Relationship="Self.FK_postreply_students1" FromRole="postreply" ToRole="students" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="realbody" Type="Int32" Nullable="false" />
+          <Property Name="body" Type="Int32" Nullable="false" />
+          <Property Name="owner" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="contenttext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ownclass" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="postc" Relationship="Self.FK_postc_posts" FromRole="posts" ToRole="postc" />
+          <NavigationProperty Name="postclass" Relationship="Self.FK_posts_students" FromRole="posts" ToRole="postclass" />
+          <NavigationProperty Name="students" Relationship="Self.FK_posts_students1" FromRole="posts" ToRole="students" />
+        </EntityType>
+        <EntityType Name="students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ifname" Type="Boolean" Nullable="false" />
+          <Property Name="nikename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="Boolean" Nullable="false" />
+          <Property Name="ifsex" Type="Boolean" Nullable="false" />
+          <Property Name="birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="year" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ifemail" Type="Boolean" Nullable="false" />
+          <Property Name="mobile" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="ifmobile" Type="Boolean" Nullable="false" />
+          <Property Name="exp" Type="Int32" Nullable="false" />
+          <Property Name="family" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="blogreply" Relationship="Self.FK_blogreply_students" FromRole="students" ToRole="blogreply" />
+          <NavigationProperty Name="blogreply1" Relationship="Self.FK_blogreply_students1" FromRole="students" ToRole="blogreply" />
+          <NavigationProperty Name="blogs" Relationship="Self.FK_blogs_students" FromRole="students" ToRole="blogs" />
+          <NavigationProperty Name="comment" Relationship="Self.FK_comment_students" FromRole="students" ToRole="comment" />
+          <NavigationProperty Name="friends" Relationship="Self.FK_friends_students" FromRole="students" ToRole="friends" />
+          <NavigationProperty Name="friends1" Relationship="Self.FK_friends_students1" FromRole="students" ToRole="friends" />
+          <NavigationProperty Name="postc" Relationship="Self.FK_postc_students" FromRole="students" ToRole="postc" />
+          <NavigationProperty Name="postreply" Relationship="Self.FK_postreply_students" FromRole="students" ToRole="postreply" />
+          <NavigationProperty Name="postreply1" Relationship="Self.FK_postreply_students1" FromRole="students" ToRole="postreply" />
+          <NavigationProperty Name="posts" Relationship="Self.FK_posts_students1" FromRole="students" ToRole="posts" />
+          <Property Name="ifbirth" Type="Boolean" Nullable="false" />
+          <Property Name="accountlevel" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_blogreply_comment">
+          <End Role="comment" Type="Self.comment" Multiplicity="1" />
+          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="ownlocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogreply_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogreply_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="replyto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogs_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="blogs" Type="Self.blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogs">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_blogs">
+          <End Role="blogs" Type="Self.blogs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blogs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="ownlocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_students">
+          <End Role="students" Type="Self.students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="friends" Type="Self.friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="focus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="friends" Type="Self.friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="befocus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postc_posts">
+          <End Role="posts" Type="Self.posts" Multiplicity="1" />
+          <End Role="postc" Type="Self.postc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postc">
+              <PropertyRef Name="ownpost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postc_students">
+          <End Role="students" Type="Self.students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="postc" Type="Self.postc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postc">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_postc">
+          <End Role="postc" Type="Self.postc" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postc">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="ownlocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_posts_students">
+          <End Role="postclass" Type="Self.postclass" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="posts" Type="Self.posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postclass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="ownclass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_students">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1" />
+          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="replyto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_posts_students1">
+          <End Role="students" Type="Self.students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="posts" Type="Self.posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="oucfreetalkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="blogreply" EntityType="Self.blogreply" />
+          <EntitySet Name="blogs" EntityType="Self.blogs" />
+          <EntitySet Name="comment" EntityType="Self.comment" />
+          <EntitySet Name="friends" EntityType="Self.friends" />
+          <EntitySet Name="postc" EntityType="Self.postc" />
+          <EntitySet Name="postclass" EntityType="Self.postclass" />
+          <EntitySet Name="postreply" EntityType="Self.postreply" />
+          <EntitySet Name="posts" EntityType="Self.posts" />
+          <EntitySet Name="students" EntityType="Self.students" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_blogreply_comment" Association="Self.FK_blogreply_comment">
+            <End Role="comment" EntitySet="comment" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogreply_students" Association="Self.FK_blogreply_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogreply_students1" Association="Self.FK_blogreply_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogs_students" Association="Self.FK_blogs_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogs" EntitySet="blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_blogs" Association="Self.FK_comment_blogs">
+            <End Role="blogs" EntitySet="blogs" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_students" Association="Self.FK_comment_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_students" Association="Self.FK_friends_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_students1" Association="Self.FK_friends_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postc_posts" Association="Self.FK_postc_posts">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="postc" EntitySet="postc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postc_students" Association="Self.FK_postc_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="postc" EntitySet="postc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postreply_postc" Association="Self.FK_postreply_postc">
+            <End Role="postc" EntitySet="postc" />
+            <End Role="postreply" EntitySet="postreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_posts_students" Association="Self.FK_posts_students">
+            <End Role="postclass" EntitySet="postclass" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postreply_students" Association="Self.FK_postreply_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="postreply" EntitySet="postreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postreply_students1" Association="Self.FK_postreply_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="postreply" EntitySet="postreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_posts_students1" Association="Self.FK_posts_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="oucfreetalkModelStoreContainer" CdmEntityContainer="oucfreetalkEntities">
+          <EntitySetMapping Name="blogreply">
+            <EntityTypeMapping TypeName="oucfreetalkModel.blogreply">
+              <MappingFragment StoreEntitySet="blogreply">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="replyto" ColumnName="replyto" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="ownlocation" ColumnName="ownlocation" />
+                <ScalarProperty Name="body" ColumnName="body" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="blogs">
+            <EntityTypeMapping TypeName="oucfreetalkModel.blogs">
+              <MappingFragment StoreEntitySet="blogs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comment">
+            <EntityTypeMapping TypeName="oucfreetalkModel.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="ownlocation" ColumnName="ownlocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="friends">
+            <EntityTypeMapping TypeName="oucfreetalkModel.friends">
+              <MappingFragment StoreEntitySet="friends">
+                <ScalarProperty Name="focus" ColumnName="focus" />
+                <ScalarProperty Name="befocus" ColumnName="befocus" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postc">
+            <EntityTypeMapping TypeName="oucfreetalkModel.postc">
+              <MappingFragment StoreEntitySet="postc">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="postlocation" ColumnName="postlocation" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="ownpost" ColumnName="ownpost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postclass">
+            <EntityTypeMapping TypeName="oucfreetalkModel.postclass">
+              <MappingFragment StoreEntitySet="postclass">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postreply">
+            <EntityTypeMapping TypeName="oucfreetalkModel.postreply">
+              <MappingFragment StoreEntitySet="postreply">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="replyto" ColumnName="replyto" />
+                <ScalarProperty Name="ownlocation" ColumnName="ownlocation" />
+                <ScalarProperty Name="contenttext" ColumnName="contenttext" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="posts">
+            <EntityTypeMapping TypeName="oucfreetalkModel.posts">
+              <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+                <ScalarProperty Name="realbody" ColumnName="realbody" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="contenttext" ColumnName="contenttext" />
+                <ScalarProperty Name="ownclass" ColumnName="ownclass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="oucfreetalkModel.students">
+              <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="accountlevel" ColumnName="accountlevel" />
+                <ScalarProperty Name="ifbirth" ColumnName="ifbirth" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ifname" ColumnName="ifname" />
+                <ScalarProperty Name="nikename" ColumnName="nikename" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="ifsex" ColumnName="ifsex" />
+                <ScalarProperty Name="birth" ColumnName="birth" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="ifemail" ColumnName="ifemail" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="ifmobile" ColumnName="ifmobile" />
+                <ScalarProperty Name="exp" ColumnName="exp" />
+                <ScalarProperty Name="family" ColumnName="family" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="oucfreetalkModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

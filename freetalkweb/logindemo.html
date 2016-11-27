@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript" src="/js/jquery-v1.10.2.min.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <input type="text" id="account" />
+    <input type="password" id="password" />
+    <button id="ok">确认</button>
+    <script type="text/javascript">
+        $("#ok").click(function () {
+            var ac = $("#account").val();
+            var pa = $("#password").val();
+            $.ajax({
+                type: "POST",
+                url: "login.ashx",
+                data: {
+                    account : ac,
+                    password : pa
+                },
+                dataType: "text",
+                success: function (json) {
+                    //var data = eval('('+json+')');
+                    //var data = new Function("return" + json)();
+                    var data = JSON.parse(json);
+                    $("#lesname").html(data.lesname);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

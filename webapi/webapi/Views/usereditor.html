@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../Views/js/jquery-v1.10.2.min.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body>
+    用户名:<input type="text" id="TxtAccount" />
+    密码:<input type="password" id="TxtPassword" />
+    <button id="BtnOk">登录</button>
+    <button id="BtnGet">获取信息</button>
+    <button id="BtnGet2">获取信息2</button>
+    <script type="text/javascript">
+        $("#BtnOk").click(function () {
+            var date = new Date();
+            date.setDate(1);
+            date.setFullYear(2000);
+            date.setMonth(2)
+            var str = "" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            //var str = "" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay() + "T00:00:00";
+            alert(str);
+            $.ajax({
+                url: "/api/Users/Editor",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "id": "14020031094",
+                    "nikename": "黑猫回收者",
+                    "sex": false,
+                    "birth": str,
+                    "year": "2014",
+                    "family": "哇哇哇哇啊哇",
+                    "pic": "1111111111",
+                    "ifname": true,
+                    "ifsex": true,
+                    "ifbirth": true,
+                    "ifmobile": true,
+                    "ifemail": true
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            }).fail(
+            function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+        })
+    </script>
+    <script>
+        function go() {
+            $.ajax({
+                url: "/api/Log/Login",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "account": "14020031094",
+                    "password": "140200031094",
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            }).fail(
+            function (xhr, textStatus, err) {
+                alert('Error: ' + err);
+            });
+        }
+        go();
+    </script>
+    <script>
+        $("#BtnGet").click(function () {
+            $.ajax({
+                url: "/api/Users/Myinformation",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                }
+            }).fail(
+           function (xhr, textStatus, err) {
+               alert('Error: ' + err);
+           });
+        });
+    </script>
+    <script>
+        $("#BtnGet2").click(function () {
+            $.ajax({
+                url: "/api/Users/Othersinformation",
+                type: "GET",
+                dataType: "json",
+                data:{
+                    "id": "14020031094"
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            }).fail(
+           function (xhr, textStatus, err) {
+               alert('Error: ' + err);
+           });
+        });
+    </script>
+</body>
+</html>
