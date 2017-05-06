@@ -15,9 +15,24 @@ namespace webapi.Controllers
         public IHttpActionResult GetMyFocus()
         {
             results res = new results();
+            string sid = "";
             try
             {
-                string sid = HttpContext.Current.Session["sid"].ToString();
+                sid = HttpContext.Current.Session["sid"].ToString();
+                if (sid == "")
+                {
+                    res.result = 0;
+                    return Ok(res);
+                }
+            }
+            catch
+            {
+                res.result = 0;
+                return Ok(res);
+            }
+            try
+            {
+               
                 using (var db = new oucfreetalkEntities())
                 {
                     var stu = db.students.FirstOrDefault(a => a.id == sid);
@@ -31,7 +46,7 @@ namespace webapi.Controllers
                                       select it).ToList();
                     if (information.Count == 0)
                     {
-                        res.result = 3;
+                        res.result = 1;
                         return Ok(res); //返回正确但是没有数据
                     }
                     for(int i = 0; i < information.Count; i++)
@@ -46,7 +61,7 @@ namespace webapi.Controllers
             }
             catch
             {
-                res.result = 0;
+                res.result = 3;
                 return Ok(res);
             }
         }
@@ -56,9 +71,23 @@ namespace webapi.Controllers
         public IHttpActionResult GetFocusMe()
         {
             results res = new results();
+            string sid = "";
             try
             {
-                string sid = HttpContext.Current.Session["sid"].ToString();
+                sid = HttpContext.Current.Session["sid"].ToString();
+                if (sid == "")
+                {
+                    res.result = 0;
+                    return Ok(res);
+                }
+            }
+            catch
+            {
+                res.result = 0;
+                return Ok(res);
+            }
+            try
+            {
                 using (var db = new oucfreetalkEntities())
                 {
                     var stu = db.students.FirstOrDefault(a => a.id == sid);
@@ -72,7 +101,7 @@ namespace webapi.Controllers
                                        select it).ToList();
                     if (information.Count == 0)
                     {
-                        res.result = 3;
+                        res.result = 1;
                         return Ok(res); //返回正确但是没有数据
                     }
                     for (int i = 0; i < information.Count; i++)
@@ -87,7 +116,7 @@ namespace webapi.Controllers
             }
             catch
             {
-                res.result = 0;
+                res.result = 3;
                 return Ok(res);
             }
         }
@@ -97,7 +126,21 @@ namespace webapi.Controllers
         public IHttpActionResult AddFriend(mytarget ta)
         {
             string target = ta.target;
-            results res = new results() ;
+            results res = new results();
+            using (var db = new oucfreetalkEntities())
+            {
+                var dlist = (from it in db.students
+                             where it.id == target
+                             select it).ToList();
+                if (dlist.Count == 0)
+                {
+                    res.result = 4;
+                    return Ok(res);
+                }
+
+
+            }
+            
             string userid = "";
             try
             {
@@ -168,6 +211,20 @@ namespace webapi.Controllers
         {
             string target = ta.target;
             results res = new results();
+            using (var db = new oucfreetalkEntities())
+            {
+                var dlist = (from it in db.students
+                             where it.id == target
+                             select it).ToList();
+                if (dlist.Count == 0)
+                {
+                    res.result = 4;
+                    return Ok(res);
+                }
+                
+          
+            }
+            
             string userid = "";
             try
             {

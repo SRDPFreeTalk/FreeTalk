@@ -18,6 +18,7 @@
     <button id="BtnOk">登录</button>
     <button id="BtnAdd">添加好友</button>
     <button id="BtnDel">删除好友</button>
+    <button id="BtnGetFriend">获取好友</button>
     <script type="text/javascript">
         $("#BtnOk").click(function () {
             var ac = $("#TxtAccount").val();
@@ -40,8 +41,9 @@
         })
     </script>
     <script type="text/javascript">
-        var postdata = { "target": "14020031091" };
+        
         $("#BtnAdd").click(function () {
+            var postdata = { "target": "14020031092" };
             $.post("/api/Friends/YouMyFriend",
                 postdata,
                 function (data) {
@@ -50,14 +52,22 @@
         })
     </script>
     <script type="text/javascript">
-        var postdata = { "target": "14020031091" };
+        
         $("#BtnDel").click(function () {
+            var postdata = { "target": "14020031091" };
             $.post("/api/Friends/YouNotFriend",
                 postdata,
                 function (data) {
                     alert(data.result);
                 });
         })
+    </script>
+    <script type="text/javascript">
+        $("#BtnGetFriend").click(function () {
+            $.get("/api/Friends/MyFocus", function (data) {
+
+            });
+        });
     </script>
 </body>
 </html>
