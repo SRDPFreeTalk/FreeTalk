@@ -30,6 +30,8 @@
         <AssociationConnector Association="oucfreetalkModel.FK_postreply_students" ManuallyRouted="false" />
         <AssociationConnector Association="oucfreetalkModel.FK_postreply_students1" ManuallyRouted="false" />
         <AssociationConnector Association="oucfreetalkModel.FK_posts_students1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="oucfreetalkModel.friendbefocus" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="oucfreetalkModel.friendfocus" Width="1.5" PointX="5.375" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

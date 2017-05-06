@@ -16,12 +16,14 @@
     <option value="1">男</option>
     </select>
     <button id="BtnOk">登录</button>
+    <button id="BtnAdd">添加好友</button>
+    <button id="BtnDel">删除好友</button>
     <script type="text/javascript">
         $("#BtnOk").click(function () {
             var ac = $("#TxtAccount").val();
             var pa = $("#TxtPassword").val();
                 $.ajax({
-                    url: "/api/Index",
+                    url: "/api/Log/Login",
                     type: "POST",
                     dataType: "json",
                     data: { 
@@ -34,6 +36,26 @@
                 }).fail(
                 function (xhr, textStatus, err) {
                     alert('Error: ' + err);
+                });
+        })
+    </script>
+    <script type="text/javascript">
+        var postdata = { "target": "14020031091" };
+        $("#BtnAdd").click(function () {
+            $.post("/api/Friends/YouMyFriend",
+                postdata,
+                function (data) {
+                    alert(data.result);
+                });
+        })
+    </script>
+    <script type="text/javascript">
+        var postdata = { "target": "14020031091" };
+        $("#BtnDel").click(function () {
+            $.post("/api/Friends/YouNotFriend",
+                postdata,
+                function (data) {
+                    alert(data.result);
                 });
         })
     </script>

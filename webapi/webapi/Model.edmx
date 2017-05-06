@@ -122,6 +122,58 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“oucfreetalk.dbo.friendbefocus”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="friendbefocus">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="befocus" />
+            <PropertyRef Name="createtime" />
+            <PropertyRef Name="nikename" />
+            <PropertyRef Name="ifname" />
+            <PropertyRef Name="pic" />
+            <PropertyRef Name="exp" />
+            <PropertyRef Name="focus" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="ifsex" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="befocus" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="nikename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ifname" Type="bit" Nullable="false" />
+          <Property Name="pic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="exp" Type="int" Nullable="false" />
+          <Property Name="focus" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="sex" Type="bit" Nullable="false" />
+          <Property Name="ifsex" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“oucfreetalk.dbo.friendfocus”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="friendfocus">
+          <Key>
+            <PropertyRef Name="ifname" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="focus" />
+            <PropertyRef Name="befocus" />
+            <PropertyRef Name="createtime" />
+            <PropertyRef Name="nikename" />
+            <PropertyRef Name="pic" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="ifsex" />
+            <PropertyRef Name="exp" />
+          </Key>
+          <Property Name="ifname" Type="bit" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="focus" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="befocus" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="nikename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="sex" Type="bit" Nullable="false" />
+          <Property Name="ifsex" Type="bit" Nullable="false" />
+          <Property Name="exp" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_blogreply_comment">
           <End Role="comment" Type="Self.comment" Multiplicity="1" />
           <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
@@ -325,6 +377,34 @@
           <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="friendbefocus" EntityType="Self.friendbefocus" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[friendbefocus].[name] AS [name], 
+[friendbefocus].[befocus] AS [befocus], 
+[friendbefocus].[createtime] AS [createtime], 
+[friendbefocus].[nikename] AS [nikename], 
+[friendbefocus].[ifname] AS [ifname], 
+[friendbefocus].[pic] AS [pic], 
+[friendbefocus].[exp] AS [exp], 
+[friendbefocus].[focus] AS [focus], 
+[friendbefocus].[sex] AS [sex], 
+[friendbefocus].[ifsex] AS [ifsex]
+FROM [dbo].[friendbefocus] AS [friendbefocus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="friendfocus" EntityType="Self.friendfocus" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[friendfocus].[ifname] AS [ifname], 
+[friendfocus].[name] AS [name], 
+[friendfocus].[focus] AS [focus], 
+[friendfocus].[befocus] AS [befocus], 
+[friendfocus].[createtime] AS [createtime], 
+[friendfocus].[nikename] AS [nikename], 
+[friendfocus].[pic] AS [pic], 
+[friendfocus].[sex] AS [sex], 
+[friendfocus].[ifsex] AS [ifsex], 
+[friendfocus].[exp] AS [exp]
+FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_blogreply_comment" Association="Self.FK_blogreply_comment">
             <End Role="comment" EntitySet="comment" />
             <End Role="blogreply" EntitySet="blogreply" />
@@ -800,7 +880,57 @@
             <End Role="students" EntitySet="students" />
             <End Role="posts" EntitySet="posts" />
           </AssociationSet>
+          <EntitySet Name="friendbefocus" EntityType="oucfreetalkModel.friendbefocus" />
+          <EntitySet Name="friendfocus" EntityType="oucfreetalkModel.friendfocus" />
         </EntityContainer>
+        <EntityType Name="friendbefocus">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="befocus" />
+            <PropertyRef Name="createtime" />
+            <PropertyRef Name="nikename" />
+            <PropertyRef Name="ifname" />
+            <PropertyRef Name="pic" />
+            <PropertyRef Name="exp" />
+            <PropertyRef Name="focus" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="ifsex" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="befocus" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nikename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ifname" Type="Boolean" Nullable="false" />
+          <Property Name="pic" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="exp" Type="Int32" Nullable="false" />
+          <Property Name="focus" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="sex" Type="Boolean" Nullable="false" />
+          <Property Name="ifsex" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="friendfocus">
+          <Key>
+            <PropertyRef Name="ifname" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="focus" />
+            <PropertyRef Name="befocus" />
+            <PropertyRef Name="createtime" />
+            <PropertyRef Name="nikename" />
+            <PropertyRef Name="pic" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="ifsex" />
+            <PropertyRef Name="exp" />
+          </Key>
+          <Property Name="ifname" Type="Boolean" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="focus" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="befocus" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nikename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pic" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="Boolean" Nullable="false" />
+          <Property Name="ifsex" Type="Boolean" Nullable="false" />
+          <Property Name="exp" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -930,6 +1060,38 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="friendbefocus">
+            <EntityTypeMapping TypeName="oucfreetalkModel.friendbefocus">
+              <MappingFragment StoreEntitySet="friendbefocus">
+                <ScalarProperty Name="ifsex" ColumnName="ifsex" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="focus" ColumnName="focus" />
+                <ScalarProperty Name="exp" ColumnName="exp" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="ifname" ColumnName="ifname" />
+                <ScalarProperty Name="nikename" ColumnName="nikename" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="befocus" ColumnName="befocus" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="friendfocus">
+            <EntityTypeMapping TypeName="oucfreetalkModel.friendfocus">
+              <MappingFragment StoreEntitySet="friendfocus">
+                <ScalarProperty Name="exp" ColumnName="exp" />
+                <ScalarProperty Name="ifsex" ColumnName="ifsex" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="nikename" ColumnName="nikename" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="befocus" ColumnName="befocus" />
+                <ScalarProperty Name="focus" ColumnName="focus" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ifname" ColumnName="ifname" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

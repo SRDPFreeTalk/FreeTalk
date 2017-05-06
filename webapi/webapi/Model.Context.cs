@@ -35,5 +35,7 @@ namespace webapi
         public DbSet<posts> posts { get; set; }
         public DbSet<students> students { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<friendbefocus> friendbefocus { get; set; }
+        public DbSet<friendfocus> friendfocus { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace webapi.Controllers
 {
     public class UsersController : ApiController
     {
+        //注册
         [HttpPost]
         [ActionName("Register")]
         public IHttpActionResult register(students std)
@@ -55,7 +56,7 @@ namespace webapi.Controllers
         }
 
 
-
+        //修改个人信息
         [HttpPost]
         [ActionName("Editor")]
         public IHttpActionResult eidtor(students stu)
@@ -117,6 +118,8 @@ namespace webapi.Controllers
             }
         }
 
+
+        //获取个人信息
         [HttpGet]
         [ActionName("Myinformation")]
         public IHttpActionResult Getmy()
@@ -163,6 +166,8 @@ namespace webapi.Controllers
                 return Ok(res);
             }
         }
+
+        //获取指定id的用户信息
 
         [HttpGet]
         [ActionName("Othersinformation")]

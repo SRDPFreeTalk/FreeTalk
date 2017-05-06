@@ -35,6 +35,7 @@ namespace webapi.Controllers
             {
 
                 res.result = 1;
+                HttpContext.Current.Session["ValidateNum"] = null;
                 return Ok(res);
             } else
                 res.result = 0;
