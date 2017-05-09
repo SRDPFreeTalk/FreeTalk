@@ -26,7 +26,7 @@ namespace webapi
         public System.DateTime updatetime { get; set; }
         public string owner { get; set; }
     
-        public virtual students students { get; set; }
         public virtual ICollection<comment> comment { get; set; }
+        public virtual students students { get; set; }
     }
 }

@@ -135,6 +135,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="accountaccess.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="friendbefocus.cs">
@@ -179,6 +183,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PostAcess.cs" />
     <Compile Include="postc.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

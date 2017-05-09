@@ -13,6 +13,7 @@
 |blogs|日志|
 |comment|评论（日志）|
 |blogreply|日志评论回复|
+|accountaccess|用户权限表|
 
 ##数据库详细介绍
 
@@ -116,3 +117,12 @@
 |createtime|datetime|否|创建时间|
 |ownlocation|int|否|回复的评论|
 |body|nvarchar(max)|否|回复内容|
+
+### accountaccess(用户权限管理)
+
+|列名|数据类型|是否可空|作用|
+|:---------|:----------|:----------|:-----------|
+|id|int|否|主键唯一标识|
+|studentid|nchar(11)|否|权限人员|
+|classid|int|否|权限  >0 板块的id  -1 所有版块管理员  -2 管理员的管理员 -1-2可同时拥有|
+|createtime|datetime|否|创建时间|

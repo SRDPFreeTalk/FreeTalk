@@ -33,9 +33,10 @@ namespace webapi
         public DbSet<postclass> postclass { get; set; }
         public DbSet<postreply> postreply { get; set; }
         public DbSet<posts> posts { get; set; }
-        public DbSet<students> students { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<friendbefocus> friendbefocus { get; set; }
         public DbSet<friendfocus> friendfocus { get; set; }
+        public DbSet<accountaccess> accountaccess { get; set; }
+        public DbSet<students> students { get; set; }
     }
 }

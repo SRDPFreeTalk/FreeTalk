@@ -33,7 +33,6 @@ namespace webapi.Controllers
                     std.ifname = false;
                     std.ifbirth = false;
                     std.password = PasswordHash.PasswordHash.CreateHash(std.password);
-                    std.accountlevel = 1;
                     db.students.Add(std);
                     if (db.SaveChanges() == 0)
                     {
@@ -145,7 +144,6 @@ namespace webapi.Controllers
                         st.exp = stu.exp;
                         st.family = stu.family;
                         st.ifbirth = stu.ifbirth;
-                        st.accountlevel = stu.accountlevel;
                         st.email = stu.email;
                         st.ifname = stu.ifname;
                         st.mobile = stu.mobile;         
@@ -191,7 +189,6 @@ namespace webapi.Controllers
                     st.exp = stu.exp;
                     st.family = stu.family;
                     st.ifbirth = stu.ifbirth;
-                    st.accountlevel = stu.accountlevel;
                     if (stu.ifemail)
                     {
                         st.email = stu.email;

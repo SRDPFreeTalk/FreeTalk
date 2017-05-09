@@ -27,7 +27,7 @@ namespace webapi
         public int ownpost { get; set; }
     
         public virtual posts posts { get; set; }
-        public virtual students students { get; set; }
         public virtual ICollection<postreply> postreply { get; set; }
+        public virtual students students { get; set; }
     }
 }

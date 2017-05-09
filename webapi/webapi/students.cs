@@ -16,6 +16,7 @@ namespace webapi
     {
         public students()
         {
+            this.accountaccess = new HashSet<accountaccess>();
             this.blogreply = new HashSet<blogreply>();
             this.blogreply1 = new HashSet<blogreply>();
             this.blogs = new HashSet<blogs>();
@@ -37,6 +38,7 @@ namespace webapi
         public bool sex { get; set; }
         public bool ifsex { get; set; }
         public System.DateTime birth { get; set; }
+        public bool ifbirth { get; set; }
         public string year { get; set; }
         public string email { get; set; }
         public bool ifemail { get; set; }
@@ -44,9 +46,8 @@ namespace webapi
         public bool ifmobile { get; set; }
         public int exp { get; set; }
         public string family { get; set; }
-        public bool ifbirth { get; set; }
-        public int accountlevel { get; set; }
     
+        public virtual ICollection<accountaccess> accountaccess { get; set; }
         public virtual ICollection<blogreply> blogreply { get; set; }
         public virtual ICollection<blogreply> blogreply1 { get; set; }
         public virtual ICollection<blogs> blogs { get; set; }

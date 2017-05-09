@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="oucfreetalkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accountaccess">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="classid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="blogreply">
           <Key>
             <PropertyRef Name="id" />
@@ -110,7 +119,6 @@
           <Property Name="ifmobile" Type="bit" Nullable="false" />
           <Property Name="exp" Type="int" Nullable="false" />
           <Property Name="family" Type="nvarchar" MaxLength="100" />
-          <Property Name="accountlevel" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -174,6 +182,20 @@
           <Property Name="ifsex" Type="bit" Nullable="false" />
           <Property Name="exp" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_accountaccess_students">
+          <End Role="students" Type="Self.students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="accountaccess" Type="Self.accountaccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountaccess">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_blogreply_comment">
           <End Role="comment" Type="Self.comment" Multiplicity="1" />
           <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
@@ -367,6 +389,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="oucfreetalkModelStoreContainer">
+          <EntitySet Name="accountaccess" EntityType="Self.accountaccess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="blogreply" EntityType="Self.blogreply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="blogs" EntityType="Self.blogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
@@ -405,6 +428,10 @@ FROM [dbo].[friendbefocus] AS [friendbefocus]</DefiningQuery>
 [friendfocus].[exp] AS [exp]
 FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_accountaccess_students" Association="Self.FK_accountaccess_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="accountaccess" EntitySet="accountaccess" />
+          </AssociationSet>
           <AssociationSet Name="FK_blogreply_comment" Association="Self.FK_blogreply_comment">
             <End Role="comment" EntitySet="comment" />
             <End Role="blogreply" EntitySet="blogreply" />
@@ -481,9 +508,9 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="ownlocation" Type="Int32" Nullable="false" />
           <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="comment" Relationship="Self.FK_blogreply_comment" FromRole="blogreply" ToRole="comment" />
-          <NavigationProperty Name="students" Relationship="Self.FK_blogreply_students" FromRole="blogreply" ToRole="students" />
-          <NavigationProperty Name="students1" Relationship="Self.FK_blogreply_students1" FromRole="blogreply" ToRole="students" />
-        </EntityType>
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_blogreply_students" FromRole="blogreply" ToRole="students" />
+          <NavigationProperty Name="students1" Relationship="oucfreetalkModel.FK_blogreply_students1" FromRole="blogreply" ToRole="students" />
+          </EntityType>
         <EntityType Name="blogs">
           <Key>
             <PropertyRef Name="id" />
@@ -494,8 +521,8 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="updatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="owner" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="students" Relationship="Self.FK_blogs_students" FromRole="blogs" ToRole="students" />
           <NavigationProperty Name="comment" Relationship="Self.FK_comment_blogs" FromRole="blogs" ToRole="comment" />
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_blogs_students" FromRole="blogs" ToRole="students" />
         </EntityType>
         <EntityType Name="comment">
           <Key>
@@ -508,7 +535,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="ownlocation" Type="Int32" Nullable="false" />
           <NavigationProperty Name="blogreply" Relationship="Self.FK_blogreply_comment" FromRole="comment" ToRole="blogreply" />
           <NavigationProperty Name="blogs" Relationship="Self.FK_comment_blogs" FromRole="comment" ToRole="blogs" />
-          <NavigationProperty Name="students" Relationship="Self.FK_comment_students" FromRole="comment" ToRole="students" />
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_comment_students" FromRole="comment" ToRole="students" />
         </EntityType>
         <EntityType Name="friends">
           <Key>
@@ -518,9 +545,9 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="focus" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="befocus" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="students" Relationship="Self.FK_friends_students" FromRole="friends" ToRole="students" />
-          <NavigationProperty Name="students1" Relationship="Self.FK_friends_students1" FromRole="friends" ToRole="students" />
-        </EntityType>
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_friends_students" FromRole="friends" ToRole="students" />
+          <NavigationProperty Name="students1" Relationship="oucfreetalkModel.FK_friends_students1" FromRole="friends" ToRole="students" />
+          </EntityType>
         <EntityType Name="postc">
           <Key>
             <PropertyRef Name="id" />
@@ -532,8 +559,8 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ownpost" Type="Int32" Nullable="false" />
           <NavigationProperty Name="posts" Relationship="Self.FK_postc_posts" FromRole="postc" ToRole="posts" />
-          <NavigationProperty Name="students" Relationship="Self.FK_postc_students" FromRole="postc" ToRole="students" />
           <NavigationProperty Name="postreply" Relationship="Self.FK_postreply_postc" FromRole="postc" ToRole="postreply" />
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_postc_students" FromRole="postc" ToRole="students" />
         </EntityType>
         <EntityType Name="postclass">
           <Key>
@@ -554,8 +581,8 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="ownlocation" Type="Int32" Nullable="false" />
           <Property Name="contenttext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="postc" Relationship="Self.FK_postreply_postc" FromRole="postreply" ToRole="postc" />
-          <NavigationProperty Name="students" Relationship="Self.FK_postreply_students" FromRole="postreply" ToRole="students" />
-          <NavigationProperty Name="students1" Relationship="Self.FK_postreply_students1" FromRole="postreply" ToRole="students" />
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_postreply_students" FromRole="postreply" ToRole="students" />
+          <NavigationProperty Name="students1" Relationship="oucfreetalkModel.FK_postreply_students1" FromRole="postreply" ToRole="students" />
         </EntityType>
         <EntityType Name="posts">
           <Key>
@@ -572,40 +599,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="ownclass" Type="Int32" Nullable="false" />
           <NavigationProperty Name="postc" Relationship="Self.FK_postc_posts" FromRole="posts" ToRole="postc" />
           <NavigationProperty Name="postclass" Relationship="Self.FK_posts_students" FromRole="posts" ToRole="postclass" />
-          <NavigationProperty Name="students" Relationship="Self.FK_posts_students1" FromRole="posts" ToRole="students" />
-        </EntityType>
-        <EntityType Name="students">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ifname" Type="Boolean" Nullable="false" />
-          <Property Name="nikename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="pic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="sex" Type="Boolean" Nullable="false" />
-          <Property Name="ifsex" Type="Boolean" Nullable="false" />
-          <Property Name="birth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="year" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ifemail" Type="Boolean" Nullable="false" />
-          <Property Name="mobile" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="ifmobile" Type="Boolean" Nullable="false" />
-          <Property Name="exp" Type="Int32" Nullable="false" />
-          <Property Name="family" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="blogreply" Relationship="Self.FK_blogreply_students" FromRole="students" ToRole="blogreply" />
-          <NavigationProperty Name="blogreply1" Relationship="Self.FK_blogreply_students1" FromRole="students" ToRole="blogreply" />
-          <NavigationProperty Name="blogs" Relationship="Self.FK_blogs_students" FromRole="students" ToRole="blogs" />
-          <NavigationProperty Name="comment" Relationship="Self.FK_comment_students" FromRole="students" ToRole="comment" />
-          <NavigationProperty Name="friends" Relationship="Self.FK_friends_students" FromRole="students" ToRole="friends" />
-          <NavigationProperty Name="friends1" Relationship="Self.FK_friends_students1" FromRole="students" ToRole="friends" />
-          <NavigationProperty Name="postc" Relationship="Self.FK_postc_students" FromRole="students" ToRole="postc" />
-          <NavigationProperty Name="postreply" Relationship="Self.FK_postreply_students" FromRole="students" ToRole="postreply" />
-          <NavigationProperty Name="postreply1" Relationship="Self.FK_postreply_students1" FromRole="students" ToRole="postreply" />
-          <NavigationProperty Name="posts" Relationship="Self.FK_posts_students1" FromRole="students" ToRole="posts" />
-          <Property Name="ifbirth" Type="Boolean" Nullable="false" />
-          <Property Name="accountlevel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_posts_students1" FromRole="posts" ToRole="students" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -629,42 +623,6 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_blogreply_students">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
-          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="blogreply">
-              <PropertyRef Name="owner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_blogreply_students1">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
-          <End Role="blogreply" Type="Self.blogreply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="blogreply">
-              <PropertyRef Name="replyto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_blogs_students">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
-          <End Role="blogs" Type="Self.blogs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="blogs">
-              <PropertyRef Name="owner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_comment_blogs">
           <End Role="blogs" Type="Self.blogs" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -679,44 +637,6 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_comment_students">
-          <End Role="students" Type="Self.students" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="comment" Type="Self.comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="comment">
-              <PropertyRef Name="owner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_friends_students">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
-          <End Role="friends" Type="Self.friends" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="friends">
-              <PropertyRef Name="focus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_friends_students1">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
-          <End Role="friends" Type="Self.friends" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="friends">
-              <PropertyRef Name="befocus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_postc_posts">
           <End Role="posts" Type="Self.posts" Multiplicity="1" />
           <End Role="postc" Type="Self.postc" Multiplicity="*" />
@@ -726,20 +646,6 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
             </Principal>
             <Dependent Role="postc">
               <PropertyRef Name="ownpost" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_postc_students">
-          <End Role="students" Type="Self.students" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="postc" Type="Self.postc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="postc">
-              <PropertyRef Name="owner" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -771,44 +677,6 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_postreply_students">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
-          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="postreply">
-              <PropertyRef Name="owner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_postreply_students1">
-          <End Role="students" Type="Self.students" Multiplicity="1" />
-          <End Role="postreply" Type="Self.postreply" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="postreply">
-              <PropertyRef Name="replyto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_posts_students1">
-          <End Role="students" Type="Self.students" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="posts" Type="Self.posts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="students">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="posts">
-              <PropertyRef Name="owner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="oucfreetalkEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="blogreply" EntityType="Self.blogreply" />
           <EntitySet Name="blogs" EntityType="Self.blogs" />
@@ -818,46 +686,17 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySet Name="postclass" EntityType="Self.postclass" />
           <EntitySet Name="postreply" EntityType="Self.postreply" />
           <EntitySet Name="posts" EntityType="Self.posts" />
-          <EntitySet Name="students" EntityType="Self.students" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_blogreply_comment" Association="Self.FK_blogreply_comment">
             <End Role="comment" EntitySet="comment" />
             <End Role="blogreply" EntitySet="blogreply" />
           </AssociationSet>
-          <AssociationSet Name="FK_blogreply_students" Association="Self.FK_blogreply_students">
-            <End Role="students" EntitySet="students" />
-            <End Role="blogreply" EntitySet="blogreply" />
-          </AssociationSet>
-          <AssociationSet Name="FK_blogreply_students1" Association="Self.FK_blogreply_students1">
-            <End Role="students" EntitySet="students" />
-            <End Role="blogreply" EntitySet="blogreply" />
-          </AssociationSet>
-          <AssociationSet Name="FK_blogs_students" Association="Self.FK_blogs_students">
-            <End Role="students" EntitySet="students" />
-            <End Role="blogs" EntitySet="blogs" />
-          </AssociationSet>
           <AssociationSet Name="FK_comment_blogs" Association="Self.FK_comment_blogs">
             <End Role="blogs" EntitySet="blogs" />
             <End Role="comment" EntitySet="comment" />
           </AssociationSet>
-          <AssociationSet Name="FK_comment_students" Association="Self.FK_comment_students">
-            <End Role="students" EntitySet="students" />
-            <End Role="comment" EntitySet="comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_friends_students" Association="Self.FK_friends_students">
-            <End Role="students" EntitySet="students" />
-            <End Role="friends" EntitySet="friends" />
-          </AssociationSet>
-          <AssociationSet Name="FK_friends_students1" Association="Self.FK_friends_students1">
-            <End Role="students" EntitySet="students" />
-            <End Role="friends" EntitySet="friends" />
-          </AssociationSet>
           <AssociationSet Name="FK_postc_posts" Association="Self.FK_postc_posts">
             <End Role="posts" EntitySet="posts" />
-            <End Role="postc" EntitySet="postc" />
-          </AssociationSet>
-          <AssociationSet Name="FK_postc_students" Association="Self.FK_postc_students">
-            <End Role="students" EntitySet="students" />
             <End Role="postc" EntitySet="postc" />
           </AssociationSet>
           <AssociationSet Name="FK_postreply_postc" Association="Self.FK_postreply_postc">
@@ -868,20 +707,54 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
             <End Role="postclass" EntitySet="postclass" />
             <End Role="posts" EntitySet="posts" />
           </AssociationSet>
-          <AssociationSet Name="FK_postreply_students" Association="Self.FK_postreply_students">
+          <EntitySet Name="friendbefocus" EntityType="oucfreetalkModel.friendbefocus" />
+          <EntitySet Name="friendfocus" EntityType="oucfreetalkModel.friendfocus" />
+          <EntitySet Name="accountaccess" EntityType="oucfreetalkModel.accountaccess" />
+          <EntitySet Name="students" EntityType="oucfreetalkModel.students" />
+          <AssociationSet Name="FK_accountaccess_students" Association="oucfreetalkModel.FK_accountaccess_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="accountaccess" EntitySet="accountaccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogreply_students" Association="oucfreetalkModel.FK_blogreply_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogreply_students1" Association="oucfreetalkModel.FK_blogreply_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogreply" EntitySet="blogreply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blogs_students" Association="oucfreetalkModel.FK_blogs_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="blogs" EntitySet="blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_students" Association="oucfreetalkModel.FK_comment_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_students" Association="oucfreetalkModel.FK_friends_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friends_students1" Association="oucfreetalkModel.FK_friends_students1">
+            <End Role="students" EntitySet="students" />
+            <End Role="friends" EntitySet="friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postc_students" Association="oucfreetalkModel.FK_postc_students">
+            <End Role="students" EntitySet="students" />
+            <End Role="postc" EntitySet="postc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postreply_students" Association="oucfreetalkModel.FK_postreply_students">
             <End Role="students" EntitySet="students" />
             <End Role="postreply" EntitySet="postreply" />
           </AssociationSet>
-          <AssociationSet Name="FK_postreply_students1" Association="Self.FK_postreply_students1">
+          <AssociationSet Name="FK_postreply_students1" Association="oucfreetalkModel.FK_postreply_students1">
             <End Role="students" EntitySet="students" />
             <End Role="postreply" EntitySet="postreply" />
           </AssociationSet>
-          <AssociationSet Name="FK_posts_students1" Association="Self.FK_posts_students1">
+          <AssociationSet Name="FK_posts_students1" Association="oucfreetalkModel.FK_posts_students1">
             <End Role="students" EntitySet="students" />
             <End Role="posts" EntitySet="posts" />
           </AssociationSet>
-          <EntitySet Name="friendbefocus" EntityType="oucfreetalkModel.friendbefocus" />
-          <EntitySet Name="friendfocus" EntityType="oucfreetalkModel.friendfocus" />
         </EntityContainer>
         <EntityType Name="friendbefocus">
           <Key>
@@ -931,6 +804,189 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="ifsex" Type="Boolean" Nullable="false" />
           <Property Name="exp" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="accountaccess">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="classid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_accountaccess_students" FromRole="accountaccess" ToRole="students" />
+        </EntityType>
+        <EntityType Name="students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ifname" Type="Boolean" Nullable="false" />
+          <Property Name="nikename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pic" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="70" FixedLength="true" Unicode="true" />
+          <Property Name="sex" Type="Boolean" Nullable="false" />
+          <Property Name="ifsex" Type="Boolean" Nullable="false" />
+          <Property Name="birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ifbirth" Type="Boolean" Nullable="false" />
+          <Property Name="year" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ifemail" Type="Boolean" Nullable="false" />
+          <Property Name="mobile" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="ifmobile" Type="Boolean" Nullable="false" />
+          <Property Name="exp" Type="Int32" Nullable="false" />
+          <Property Name="family" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="accountaccess" Relationship="oucfreetalkModel.FK_accountaccess_students" FromRole="students" ToRole="accountaccess" />
+          <NavigationProperty Name="blogreply" Relationship="oucfreetalkModel.FK_blogreply_students" FromRole="students" ToRole="blogreply" />
+          <NavigationProperty Name="blogreply1" Relationship="oucfreetalkModel.FK_blogreply_students1" FromRole="students" ToRole="blogreply" />
+          <NavigationProperty Name="blogs" Relationship="oucfreetalkModel.FK_blogs_students" FromRole="students" ToRole="blogs" />
+          <NavigationProperty Name="comment" Relationship="oucfreetalkModel.FK_comment_students" FromRole="students" ToRole="comment" />
+          <NavigationProperty Name="friends" Relationship="oucfreetalkModel.FK_friends_students" FromRole="students" ToRole="friends" />
+          <NavigationProperty Name="friends1" Relationship="oucfreetalkModel.FK_friends_students1" FromRole="students" ToRole="friends" />
+          <NavigationProperty Name="postc" Relationship="oucfreetalkModel.FK_postc_students" FromRole="students" ToRole="postc" />
+          <NavigationProperty Name="postreply" Relationship="oucfreetalkModel.FK_postreply_students" FromRole="students" ToRole="postreply" />
+          <NavigationProperty Name="postreply1" Relationship="oucfreetalkModel.FK_postreply_students1" FromRole="students" ToRole="postreply" />
+          <NavigationProperty Name="posts" Relationship="oucfreetalkModel.FK_posts_students1" FromRole="students" ToRole="posts" />
+        </EntityType>
+        <Association Name="FK_accountaccess_students">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="oucfreetalkModel.accountaccess" Role="accountaccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accountaccess">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogreply_students">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1" />
+          <End Type="oucfreetalkModel.blogreply" Role="blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogreply_students1">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1" />
+          <End Type="oucfreetalkModel.blogreply" Role="blogreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogreply">
+              <PropertyRef Name="replyto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blogs_students">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1" />
+          <End Type="oucfreetalkModel.blogs" Role="blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blogs">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_students">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="oucfreetalkModel.comment" Role="comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_students">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1" />
+          <End Type="oucfreetalkModel.friends" Role="friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="focus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friends_students1">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1" />
+          <End Type="oucfreetalkModel.friends" Role="friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friends">
+              <PropertyRef Name="befocus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postc_students">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="oucfreetalkModel.postc" Role="postc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postc">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_students">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1" />
+          <End Type="oucfreetalkModel.postreply" Role="postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postreply_students1">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1" />
+          <End Type="oucfreetalkModel.postreply" Role="postreply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postreply">
+              <PropertyRef Name="replyto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_posts_students1">
+          <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="oucfreetalkModel.posts" Role="posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1028,30 +1084,6 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="students">
-            <EntityTypeMapping TypeName="oucfreetalkModel.students">
-              <MappingFragment StoreEntitySet="students">
-                <ScalarProperty Name="accountlevel" ColumnName="accountlevel" />
-                <ScalarProperty Name="ifbirth" ColumnName="ifbirth" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="ifname" ColumnName="ifname" />
-                <ScalarProperty Name="nikename" ColumnName="nikename" />
-                <ScalarProperty Name="pic" ColumnName="pic" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="ifsex" ColumnName="ifsex" />
-                <ScalarProperty Name="birth" ColumnName="birth" />
-                <ScalarProperty Name="year" ColumnName="year" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="ifemail" ColumnName="ifemail" />
-                <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="ifmobile" ColumnName="ifmobile" />
-                <ScalarProperty Name="exp" ColumnName="exp" />
-                <ScalarProperty Name="family" ColumnName="family" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="oucfreetalkModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1092,6 +1124,39 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
                 <ScalarProperty Name="focus" ColumnName="focus" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ifname" ColumnName="ifname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accountaccess">
+            <EntityTypeMapping TypeName="oucfreetalkModel.accountaccess">
+              <MappingFragment StoreEntitySet="accountaccess">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="classid" ColumnName="classid" />
+                <ScalarProperty Name="studentid" ColumnName="studentid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="oucfreetalkModel.students">
+              <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="family" ColumnName="family" />
+                <ScalarProperty Name="exp" ColumnName="exp" />
+                <ScalarProperty Name="ifmobile" ColumnName="ifmobile" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="ifemail" ColumnName="ifemail" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="ifbirth" ColumnName="ifbirth" />
+                <ScalarProperty Name="birth" ColumnName="birth" />
+                <ScalarProperty Name="ifsex" ColumnName="ifsex" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="nikename" ColumnName="nikename" />
+                <ScalarProperty Name="ifname" ColumnName="ifname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

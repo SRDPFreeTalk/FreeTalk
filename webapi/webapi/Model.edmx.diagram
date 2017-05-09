@@ -13,25 +13,27 @@
         <EntityTypeShape EntityType="oucfreetalkModel.postclass" Width="1.5" PointX="3.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="oucfreetalkModel.postreply" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="oucfreetalkModel.posts" Width="1.5" PointX="6" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="oucfreetalkModel.students" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="oucfreetalkModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="oucfreetalkModel.FK_blogreply_comment" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_blogreply_students" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_blogreply_students1" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_blogs_students" ManuallyRouted="false" />
         <AssociationConnector Association="oucfreetalkModel.FK_comment_blogs" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_comment_students" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_friends_students" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_friends_students1" ManuallyRouted="false" />
         <AssociationConnector Association="oucfreetalkModel.FK_postc_posts" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_postc_students" ManuallyRouted="false" />
         <AssociationConnector Association="oucfreetalkModel.FK_postreply_postc" ManuallyRouted="false" />
         <AssociationConnector Association="oucfreetalkModel.FK_posts_students" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_postreply_students" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_postreply_students1" ManuallyRouted="false" />
-        <AssociationConnector Association="oucfreetalkModel.FK_posts_students1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="oucfreetalkModel.friendbefocus" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="oucfreetalkModel.friendfocus" Width="1.5" PointX="5.375" PointY="0.875" />
+        <EntityTypeShape EntityType="oucfreetalkModel.accountaccess" Width="1.5" PointX="3" PointY="19.875" />
+        <EntityTypeShape EntityType="oucfreetalkModel.students" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="oucfreetalkModel.FK_accountaccess_students" />
+        <AssociationConnector Association="oucfreetalkModel.FK_blogreply_students" />
+        <AssociationConnector Association="oucfreetalkModel.FK_blogreply_students1" />
+        <AssociationConnector Association="oucfreetalkModel.FK_blogs_students" />
+        <AssociationConnector Association="oucfreetalkModel.FK_comment_students" />
+        <AssociationConnector Association="oucfreetalkModel.FK_friends_students" />
+        <AssociationConnector Association="oucfreetalkModel.FK_friends_students1" />
+        <AssociationConnector Association="oucfreetalkModel.FK_postc_students" />
+        <AssociationConnector Association="oucfreetalkModel.FK_postreply_students" />
+        <AssociationConnector Association="oucfreetalkModel.FK_postreply_students1" />
+        <AssociationConnector Association="oucfreetalkModel.FK_posts_students1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
