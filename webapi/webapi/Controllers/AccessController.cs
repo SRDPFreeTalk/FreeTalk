@@ -194,7 +194,7 @@ namespace webapi.Controllers
                 if (sad.accessclass != -1)
                 {
                     var search_access = (from it in db.postclass
-                                         where it.id == sad.accessclass
+                                         where it.id == sad.accessclass && it.state==true
                                          select it).ToList();
                     if (search_access.Count == 0)
                     {

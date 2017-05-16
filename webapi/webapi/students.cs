@@ -46,6 +46,7 @@ namespace webapi
         public bool ifmobile { get; set; }
         public int exp { get; set; }
         public string family { get; set; }
+        public string introduction { get; set; }
     
         public virtual ICollection<accountaccess> accountaccess { get; set; }
         public virtual ICollection<blogreply> blogreply { get; set; }

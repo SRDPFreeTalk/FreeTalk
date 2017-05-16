@@ -14,6 +14,18 @@
           <Property Name="classid" Type="int" Nullable="false" />
           <Property Name="createtime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="application">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="apptype" Type="int" Nullable="false" />
+          <Property Name="stuid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="groupid" Type="int" />
+          <Property Name="groupname" Type="nvarchar(max)" />
+          <Property Name="state" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="blogreply">
           <Key>
             <PropertyRef Name="id" />
@@ -24,6 +36,7 @@
           <Property Name="createtime" Type="datetime" Nullable="false" />
           <Property Name="ownlocation" Type="int" Nullable="false" />
           <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="blogs">
           <Key>
@@ -36,6 +49,16 @@
           <Property Name="updatetime" Type="datetime" Nullable="false" />
           <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
         </EntityType>
+        <EntityType Name="burieddata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stuid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="actionid" Type="int" Nullable="false" />
+          <Property Name="resultid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="comment">
           <Key>
             <PropertyRef Name="id" />
@@ -45,6 +68,7 @@
           <Property Name="createtime" Type="datetime" Nullable="false" />
           <Property Name="body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ownlocation" Type="int" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="friends">
           <Key>
@@ -53,6 +77,50 @@
           </Key>
           <Property Name="focus" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="befocus" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="groupaccess">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stuid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="groupid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="groupintroduction" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ico" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lostafound">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stuid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="area" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="secarea" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="noticeclass" Type="int" Nullable="false" />
+          <Property Name="postid" Type="int" />
+          <Property Name="stuid" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="replyid" Type="int" />
+          <Property Name="replystuid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
+          <Property Name="commentsid" Type="int" />
           <Property Name="createtime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="postc">
@@ -65,6 +133,7 @@
           <Property Name="createtime" Type="datetime" Nullable="false" />
           <Property Name="body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ownpost" Type="int" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="postclass">
           <Key>
@@ -72,6 +141,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="postreply">
           <Key>
@@ -83,6 +153,7 @@
           <Property Name="replyto" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="ownlocation" Type="int" Nullable="false" />
           <Property Name="contenttext" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="posts">
           <Key>
@@ -97,6 +168,7 @@
           <Property Name="owner" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="contenttext" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ownclass" Type="int" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="students">
           <Key>
@@ -119,6 +191,17 @@
           <Property Name="ifmobile" Type="bit" Nullable="false" />
           <Property Name="exp" Type="int" Nullable="false" />
           <Property Name="family" Type="nvarchar" MaxLength="100" />
+          <Property Name="introduction" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stumessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="postid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="receiveid" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="state" Type="bit" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -390,15 +473,22 @@
         </Association>
         <EntityContainer Name="oucfreetalkModelStoreContainer">
           <EntitySet Name="accountaccess" EntityType="Self.accountaccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="application" EntityType="Self.application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="blogreply" EntityType="Self.blogreply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="blogs" EntityType="Self.blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="burieddata" EntityType="Self.burieddata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="friends" EntityType="Self.friends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groupaccess" EntityType="Self.groupaccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groups" EntityType="Self.groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lostafound" EntityType="Self.lostafound" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notices" EntityType="Self.notices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="postc" EntityType="Self.postc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="postclass" EntityType="Self.postclass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="postreply" EntityType="Self.postreply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="students" EntityType="Self.students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stumessage" EntityType="Self.stumessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="friendbefocus" EntityType="Self.friendbefocus" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -510,6 +600,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <NavigationProperty Name="comment" Relationship="Self.FK_blogreply_comment" FromRole="blogreply" ToRole="comment" />
           <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_blogreply_students" FromRole="blogreply" ToRole="students" />
           <NavigationProperty Name="students1" Relationship="oucfreetalkModel.FK_blogreply_students1" FromRole="blogreply" ToRole="students" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
           </EntityType>
         <EntityType Name="blogs">
           <Key>
@@ -536,6 +627,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <NavigationProperty Name="blogreply" Relationship="Self.FK_blogreply_comment" FromRole="comment" ToRole="blogreply" />
           <NavigationProperty Name="blogs" Relationship="Self.FK_comment_blogs" FromRole="comment" ToRole="blogs" />
           <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_comment_students" FromRole="comment" ToRole="students" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="friends">
           <Key>
@@ -561,6 +653,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <NavigationProperty Name="posts" Relationship="Self.FK_postc_posts" FromRole="postc" ToRole="posts" />
           <NavigationProperty Name="postreply" Relationship="Self.FK_postreply_postc" FromRole="postc" ToRole="postreply" />
           <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_postc_students" FromRole="postc" ToRole="students" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="postclass">
           <Key>
@@ -569,6 +662,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="posts" Relationship="Self.FK_posts_students" FromRole="postclass" ToRole="posts" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="postreply">
           <Key>
@@ -583,6 +677,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <NavigationProperty Name="postc" Relationship="Self.FK_postreply_postc" FromRole="postreply" ToRole="postc" />
           <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_postreply_students" FromRole="postreply" ToRole="students" />
           <NavigationProperty Name="students1" Relationship="oucfreetalkModel.FK_postreply_students1" FromRole="postreply" ToRole="students" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="posts">
           <Key>
@@ -600,6 +695,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <NavigationProperty Name="postc" Relationship="Self.FK_postc_posts" FromRole="posts" ToRole="postc" />
           <NavigationProperty Name="postclass" Relationship="Self.FK_posts_students" FromRole="posts" ToRole="postclass" />
           <NavigationProperty Name="students" Relationship="oucfreetalkModel.FK_posts_students1" FromRole="posts" ToRole="students" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -755,6 +851,13 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
             <End Role="students" EntitySet="students" />
             <End Role="posts" EntitySet="posts" />
           </AssociationSet>
+          <EntitySet Name="groupaccess" EntityType="oucfreetalkModel.groupaccess" />
+          <EntitySet Name="groups" EntityType="oucfreetalkModel.groups" />
+          <EntitySet Name="stumessage" EntityType="oucfreetalkModel.stumessage" />
+          <EntitySet Name="notices" EntityType="oucfreetalkModel.notices" />
+          <EntitySet Name="lostafound" EntityType="oucfreetalkModel.lostafound" />
+          <EntitySet Name="application" EntityType="oucfreetalkModel.application" />
+          <EntitySet Name="burieddata" EntityType="oucfreetalkModel.burieddata" />
         </EntityContainer>
         <EntityType Name="friendbefocus">
           <Key>
@@ -846,6 +949,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <NavigationProperty Name="postreply" Relationship="oucfreetalkModel.FK_postreply_students" FromRole="students" ToRole="postreply" />
           <NavigationProperty Name="postreply1" Relationship="oucfreetalkModel.FK_postreply_students1" FromRole="students" ToRole="postreply" />
           <NavigationProperty Name="posts" Relationship="oucfreetalkModel.FK_posts_students1" FromRole="students" ToRole="posts" />
+          <Property Name="introduction" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_accountaccess_students">
           <End Type="oucfreetalkModel.students" Role="students" Multiplicity="1">
@@ -987,6 +1091,82 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="groupaccess">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stuid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="groupid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="groupintroduction" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ico" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="stumessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="postid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="receiveid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="notices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="noticeclass" Type="Int32" Nullable="false" />
+          <Property Name="postid" Type="Int32" />
+          <Property Name="stuid" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="replyid" Type="Int32" />
+          <Property Name="replystuid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
+          <Property Name="commentsid" Type="Int32" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="lostafound">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stuid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="area" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="secarea" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="state" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="application">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="apptype" Type="Int32" Nullable="false" />
+          <Property Name="stuid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="groupid" Type="Int32" />
+          <Property Name="groupname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="burieddata">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stuid" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="actionid" Type="Int32" Nullable="false" />
+          <Property Name="resultid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -996,6 +1176,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySetMapping Name="blogreply">
             <EntityTypeMapping TypeName="oucfreetalkModel.blogreply">
               <MappingFragment StoreEntitySet="blogreply">
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="owner" ColumnName="owner" />
                 <ScalarProperty Name="replyto" ColumnName="replyto" />
@@ -1020,6 +1201,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySetMapping Name="comment">
             <EntityTypeMapping TypeName="oucfreetalkModel.comment">
               <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="owner" ColumnName="owner" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
@@ -1040,6 +1222,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySetMapping Name="postc">
             <EntityTypeMapping TypeName="oucfreetalkModel.postc">
               <MappingFragment StoreEntitySet="postc">
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="postlocation" ColumnName="postlocation" />
                 <ScalarProperty Name="owner" ColumnName="owner" />
@@ -1052,6 +1235,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySetMapping Name="postclass">
             <EntityTypeMapping TypeName="oucfreetalkModel.postclass">
               <MappingFragment StoreEntitySet="postclass">
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
@@ -1060,6 +1244,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySetMapping Name="postreply">
             <EntityTypeMapping TypeName="oucfreetalkModel.postreply">
               <MappingFragment StoreEntitySet="postreply">
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
                 <ScalarProperty Name="owner" ColumnName="owner" />
@@ -1072,6 +1257,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySetMapping Name="posts">
             <EntityTypeMapping TypeName="oucfreetalkModel.posts">
               <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="createtime" ColumnName="createtime" />
@@ -1140,6 +1326,7 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
           <EntitySetMapping Name="students">
             <EntityTypeMapping TypeName="oucfreetalkModel.students">
               <MappingFragment StoreEntitySet="students">
+                <ScalarProperty Name="introduction" ColumnName="introduction" />
                 <ScalarProperty Name="family" ColumnName="family" />
                 <ScalarProperty Name="exp" ColumnName="exp" />
                 <ScalarProperty Name="ifmobile" ColumnName="ifmobile" />
@@ -1156,6 +1343,89 @@ FROM [dbo].[friendfocus] AS [friendfocus]</DefiningQuery>
                 <ScalarProperty Name="nikename" ColumnName="nikename" />
                 <ScalarProperty Name="ifname" ColumnName="ifname" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groupaccess">
+            <EntityTypeMapping TypeName="oucfreetalkModel.groupaccess">
+              <MappingFragment StoreEntitySet="groupaccess">
+                <ScalarProperty Name="groupid" ColumnName="groupid" />
+                <ScalarProperty Name="stuid" ColumnName="stuid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groups">
+            <EntityTypeMapping TypeName="oucfreetalkModel.groups">
+              <MappingFragment StoreEntitySet="groups">
+                <ScalarProperty Name="ico" ColumnName="ico" />
+                <ScalarProperty Name="groupintroduction" ColumnName="groupintroduction" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stumessage">
+            <EntityTypeMapping TypeName="oucfreetalkModel.stumessage">
+              <MappingFragment StoreEntitySet="stumessage">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="receiveid" ColumnName="receiveid" />
+                <ScalarProperty Name="postid" ColumnName="postid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notices">
+            <EntityTypeMapping TypeName="oucfreetalkModel.notices">
+              <MappingFragment StoreEntitySet="notices">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="commentsid" ColumnName="commentsid" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="replystuid" ColumnName="replystuid" />
+                <ScalarProperty Name="replyid" ColumnName="replyid" />
+                <ScalarProperty Name="stuid" ColumnName="stuid" />
+                <ScalarProperty Name="postid" ColumnName="postid" />
+                <ScalarProperty Name="noticeclass" ColumnName="noticeclass" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lostafound">
+            <EntityTypeMapping TypeName="oucfreetalkModel.lostafound">
+              <MappingFragment StoreEntitySet="lostafound">
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="secarea" ColumnName="secarea" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="stuid" ColumnName="stuid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="application">
+            <EntityTypeMapping TypeName="oucfreetalkModel.application">
+              <MappingFragment StoreEntitySet="application">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="groupid" ColumnName="groupid" />
+                <ScalarProperty Name="stuid" ColumnName="stuid" />
+                <ScalarProperty Name="apptype" ColumnName="apptype" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="burieddata">
+            <EntityTypeMapping TypeName="oucfreetalkModel.burieddata">
+              <MappingFragment StoreEntitySet="burieddata">
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="resultid" ColumnName="resultid" />
+                <ScalarProperty Name="actionid" ColumnName="actionid" />
+                <ScalarProperty Name="stuid" ColumnName="stuid" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

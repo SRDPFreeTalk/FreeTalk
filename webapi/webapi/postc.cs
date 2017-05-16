@@ -25,6 +25,7 @@ namespace webapi
         public System.DateTime createtime { get; set; }
         public string body { get; set; }
         public int ownpost { get; set; }
+        public bool state { get; set; }
     
         public virtual posts posts { get; set; }
         public virtual ICollection<postreply> postreply { get; set; }

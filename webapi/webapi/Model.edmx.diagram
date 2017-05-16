@@ -34,6 +34,13 @@
         <AssociationConnector Association="oucfreetalkModel.FK_postreply_students" />
         <AssociationConnector Association="oucfreetalkModel.FK_postreply_students1" />
         <AssociationConnector Association="oucfreetalkModel.FK_posts_students1" />
+        <EntityTypeShape EntityType="oucfreetalkModel.groupaccess" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="oucfreetalkModel.groups" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="oucfreetalkModel.stumessage" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="oucfreetalkModel.notices" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="oucfreetalkModel.lostafound" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="oucfreetalkModel.application" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="oucfreetalkModel.burieddata" Width="1.5" PointX="10.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -10,13 +10,21 @@ namespace webapi.Controllers
 {
     public class UsersController : ApiController
     {
+        public class registerdata
+        {
+            public string id { get; set; }
+            public string password { get; set; }
+            public string nikename { get; set; }
+            public bool sex { get; set; }
+            public string introduce { get; set; }
+        }
         //注册
         [HttpPost]
         [ActionName("Register")]
-        public IHttpActionResult register(students std)
+        public IHttpActionResult register(registerdata rgd)
         {
             results res = new results();
-            if (IfExist(std.id))
+            if (IfExist(rgd.id))
             {
                 res.result = 2;
                 return Ok(res);
@@ -26,13 +34,21 @@ namespace webapi.Controllers
             {
                 using (var db = new oucfreetalkEntities())
                 {
+                    students std = new students();
+                    std.id = rgd.id;
+                    std.nikename = rgd.nikename;
+                    std.sex = rgd.sex;
+                    std.introduction = rgd.introduce;
+                    std.name = " ";
+                    std.birth = DateTime.Today;
+                    std.year = DateTime.Today.Year.ToString();
                     std.ifsex = false;
                     std.exp = 0;
                     std.ifemail = false;
                     std.ifmobile = false;
                     std.ifname = false;
                     std.ifbirth = false;
-                    std.password = PasswordHash.PasswordHash.CreateHash(std.password);
+                    std.password = PasswordHash.PasswordHash.CreateHash(rgd.password);
                     db.students.Add(std);
                     if (db.SaveChanges() == 0)
                     {
@@ -146,7 +162,7 @@ namespace webapi.Controllers
                         st.ifbirth = stu.ifbirth;
                         st.email = stu.email;
                         st.ifname = stu.ifname;
-                        st.mobile = stu.mobile;         
+                        st.mobile = stu.mobile;
                         st.birth = stu.birth;
                         st.sex = stu.sex;
                         return Ok(st);

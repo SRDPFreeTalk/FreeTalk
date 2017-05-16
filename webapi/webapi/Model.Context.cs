@@ -38,5 +38,12 @@ namespace webapi
         public DbSet<friendfocus> friendfocus { get; set; }
         public DbSet<accountaccess> accountaccess { get; set; }
         public DbSet<students> students { get; set; }
+        public DbSet<groupaccess> groupaccess { get; set; }
+        public DbSet<groups> groups { get; set; }
+        public DbSet<stumessage> stumessage { get; set; }
+        public DbSet<notices> notices { get; set; }
+        public DbSet<lostafound> lostafound { get; set; }
+        public DbSet<application> application { get; set; }
+        public DbSet<burieddata> burieddata { get; set; }
     }
 }
