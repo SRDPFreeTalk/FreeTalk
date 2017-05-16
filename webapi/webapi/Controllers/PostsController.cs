@@ -350,7 +350,7 @@ namespace webapi.Controllers
             public int index { get; set; }
         }
         [HttpGet]
-        [ActionName("getPost")]
+        [ActionName("getComment")]
         public IHttpActionResult getCommentindex(ReqCommentData rcd)
         {
             results res = new results();
@@ -366,9 +366,20 @@ namespace webapi.Controllers
                     return Ok(res);
                 }
                 var searchreply = (from it in db.postreply
+                                   join it2 in db.students on it.owner equals it2.id
+                                   join it3 in db.students on it.replyto equals it3.id
                                    where it.ownlocation == thiscomment.id && it.state == true
                                    orderby it.createtime descending
-                                   select it).ToList();
+                                   select new
+                                   {
+                                       it.id,
+                                       it.contenttext,
+                                       it.createtime,
+                                       stuid = it2.id,
+                                       stunike = it2.nikename,
+                                       replyid=it.replyto,
+                                       replynike = it3.nikename
+                                   }).ToList();
                 int allcount = searchreply.Count;
                 int allpage = allcount / perpage;
                 if (allcount % perpage != 0)
@@ -772,12 +783,7 @@ namespace webapi.Controllers
                     var classes = (from it in db.postclass
                                    where it.state==true
                                    select it).ToList();
-                    if (classes.Count == 0)
-                    {
-                        res.result = 0;
-                        return Ok(res);
-                    }
-                    return Ok(classes);
+                    return Ok(new { classes, classes.Count });
                 }
             }
             catch

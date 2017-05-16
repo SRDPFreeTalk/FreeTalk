@@ -23,12 +23,8 @@
                         "id" : "14020031094",
                         "password": "140200031094",
                         "nikename": "黑猫回收者",
-                        "name":"王晓瑞",
+                        "introduce":"个人介绍",
                         "sex": false,
-                        "birth": date.valueOf(),
-                        "year": "2014",
-                        "family": "哇哇哇哇啊哇",
-                        "pic":"\example\"
                     }`
 
 返回 `{ "result" : 代码}`
