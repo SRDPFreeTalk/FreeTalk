@@ -14,6 +14,12 @@
 |comment|评论（日志）|
 |blogreply|日志评论回复|
 |accountaccess|用户权限表|
+|stumessage|学生聊天|
+|notices|通知消息|
+|groups|社团表|
+|groupaccess|社团权限表|
+|lostafound|失物招领|
+
 
 ##数据库详细介绍
 
@@ -38,6 +44,7 @@
 |ifmobile|bit|否|手机号是否显示|
 |exp|int|否|经验，初始值为0|
 |family|nvarchar(100)|否|家乡，字符串表示即可|
+|introduction|nvarchar(max)|否||
 
 ###postclass(帖子分类)
 
@@ -126,3 +133,44 @@
 |studentid|nchar(11)|否|权限人员|
 |classid|int|否|权限  >0 板块的id  -1 所有版块管理员  -2 管理员的管理员 -1-2可同时拥有|
 |createtime|datetime|否|创建时间|
+
+### groups(社团)
+
+|列名|数据类型|是否可空|作用|
+|:---------|:----------|:----------|:-----------|
+|id|int|否|主键唯一标识|
+|groupname|nvarchar(50)|否|社团名|
+|createtime|nvarchar(50)|否|创建时间|
+|groupintroduction|nvarchar(max)|否|社团简介|
+|ico|nvarchar(50)|否|社团头像|
+
+### groupaccess(社团权限)
+
+|列名|数据类型|是否可空|作用|
+|:---------|:----------|:----------|:-----------|
+|id|int|否|主键唯一标识|
+|stuid|ncahr(11)|否|管理员id|
+|groupid|int|否|社团的id|
+
+### stumessage(学生聊天)
+
+|列名|数据类型|是否可空|作用|
+|:---------|:----------|:----------|:-----------|
+|id|int|否|主键唯一标识|
+|postid|nchar(11)|否|发送方id|
+|receiveid|nchar(11)|否|接收方id|
+|state|bit|否|是否已读|
+|createtime|datetime|否|创建时间|
+
+### notices(通知)
+
+|列名|数据类型|是否可空|作用|
+|:---------|:----------|:----------|:-----------|
+|id|int|否|主键唯一标识|
+|noticeclass|int|否|通知类型便于分类|
+|postid|int|是|主题id|
+|stuid|nvarchar(11)|否|接受学生id|
+|replyid|int|是|回复id|
+|replystuid|nvarchar(11)|否|引起提醒的学生id|
+|state|int|否|状态|
+|commentsid|int|是|评论id|

@@ -20,6 +20,7 @@ namespace webapi
         public string replyto { get; set; }
         public int ownlocation { get; set; }
         public string contenttext { get; set; }
+        public bool state { get; set; }
     
         public virtual postc postc { get; set; }
         public virtual students students { get; set; }

@@ -22,7 +22,25 @@
 
 ### /api/Posts/addPost
 
+方法 POST
+
+数据 
+```
+{
+    title:"aaa",    //帖子名 
+    context:"aasdasad",    //帖子头
+    pclass: 1     //帖子版块
+}
+
+```
+
 ### /api/Posts/addcomments
+
+```
+{
+    
+}
+```
 
 ### /api/Posts/getPosts
 

@@ -20,6 +20,7 @@ namespace webapi
         public System.DateTime createtime { get; set; }
         public int ownlocation { get; set; }
         public string body { get; set; }
+        public bool state { get; set; }
     
         public virtual comment comment { get; set; }
         public virtual students students { get; set; }

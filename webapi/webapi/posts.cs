@@ -28,6 +28,7 @@ namespace webapi
         public string owner { get; set; }
         public string contenttext { get; set; }
         public int ownclass { get; set; }
+        public bool state { get; set; }
     
         public virtual ICollection<postc> postc { get; set; }
         public virtual postclass postclass { get; set; }

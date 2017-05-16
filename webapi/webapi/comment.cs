@@ -24,6 +24,7 @@ namespace webapi
         public System.DateTime createtime { get; set; }
         public string body { get; set; }
         public int ownlocation { get; set; }
+        public bool state { get; set; }
     
         public virtual ICollection<blogreply> blogreply { get; set; }
         public virtual blogs blogs { get; set; }
